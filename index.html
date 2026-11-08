@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Household Expenses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Sri Lankan rupees (LKR) &middot; 1 May to 6 Nov 2026</div>
+      <h1>Household expenses</h1>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Period" id="period">
+        <button type="button" data-p="30" aria-pressed="true">30 days</button>
+        <button type="button" data-p="90" aria-pressed="false">90 days</button>
+        <button type="button" data-p="all" aria-pressed="false">All</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="card" aria-label="Total money">
+    <div class="card-head">
+      <div><h2>Total money</h2><p class="sub">Money you have, minus everything spent since 1 May. Everything starts at zero.</p></div>
+    </div>
+    <div class="money" id="money"></div>
+    <form class="moneyform" id="moneyForm" novalidate>
+      <label for="mAmt">Add money<input class="input" type="number" id="mAmt" min="0" step="1" inputmode="numeric" placeholder="e.g. 150000"></label>
+      <button class="btn" type="submit">Add money</button>
+    </form>
+    <p class="msg" id="moneyMsg" role="status"></p>
+  </section>
+
+  <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+  <section class="card" aria-label="Categories">
+    <div class="card-head">
+      <div><h2>Categories</h2><p class="sub">Select a category to hide it from every chart and the ledger.</p></div>
+    </div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <div class="row">
+    <section class="card">
+      <div class="card-head">
+        <div><h2>Spending by month</h2><p class="sub" id="monthSub"></p></div>
+        <button type="button" class="linkbtn" id="viewToggle">View table</button>
+      </div>
+      <div class="chart" id="monthly"></div>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <div><h2>Spent against budget</h2><p class="sub" id="catSub"></p></div>
+      </div>
+      <div class="cats" id="cats"></div>
+      <div class="key"><span><b></b>Budget for the period</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="card-head">
+      <div><h2>Rolling 7-day spend</h2><p class="sub">Total of the 7 days ending on each date, for the selected period.</p></div>
+    </div>
+    <div class="chart" id="trend"></div>
+  </section>
+
+  <section class="card">
+    <details class="addbox" id="addbox">
+      <summary>Add an expense</summary>
+      <form class="add" id="addForm" novalidate>
+        <label for="fDate">Date<input class="input" type="date" id="fDate" min="2026-05-01" max="2026-11-06" value="2026-11-06"></label>
+        <label for="fDesc">Description<input class="input" type="text" id="fDesc" placeholder="Fruit and veg"></label>
+        <label for="fCat">Category<select class="input" id="fCat"></select></label>
+        <label for="fAmt">Amount<input class="input" type="number" id="fAmt" min="0" step="1" inputmode="numeric" placeholder="0"></label>
+        <button class="btn" type="submit">Add expense</button>
+      </form>
+      <p class="msg" id="addMsg" role="status"></p>
+    </details>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div><h2>Ledger</h2><p class="sub" id="ledgerSub"></p></div>
+      <div class="tools"><input class="input" type="search" id="q" placeholder="Search description or category" aria-label="Search expenses"></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Date</th><th>Description</th><th>Category</th><th class="num">Amount</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button type="button" class="linkbtn" id="more">Show more</button>
+      <span class="foot" id="shown"></span>
+    </div>
+  </section>
+
+  <p class="foot">Expenses and money you add are kept in this browser only.</p>
+</div>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
